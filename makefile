@@ -10,13 +10,13 @@ CC = gcc
 LDFLAGS = -s -lcomctl32 -lodbc32 -lcomdlg32 -Wl,--subsystem,windows
 RC = windres
 
-# Compile ANSI build only if CHARSET=ANSI
-
-
 all: GpgChecker.exe
 
 GpgChecker.exe: ${OBJS}
 	${CC} -o "$@" ${OBJS} ${LDFLAGS}
+	
+obj:
+	mkdir obj
 
 clean:
 	del obj\*.o "GpgChecker.exe"
