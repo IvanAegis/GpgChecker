@@ -1,0 +1,9 @@
+#define IDC_ABOUT                           1001
+#define IDC_DEVFILE                         1002
+#define IDC_FILENAME_DEV_PK                 1003
+#define IDC_FLUSH                           1004
+#define IDC_ADDFILES                        1005
+#define IDC_LISTVIEW                        1006
+#define IDC_EXPORT                          1007
+#define IDD_MAIN                            101
+#define IDI_ICON1                           102

@@ -1,0 +1,72 @@
+#include "resource.h"
+#include <windows.h>
+#include <commctrl.h>
+#pragma code_page(65001) // UTF-8
+
+//////////////////////////////////////////////////////////////////////////////
+
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
+
+//////////////////////////////////////////////////////////////////////////////
+
+//MAIN DIALOG
+
+IDD_MAIN DIALOGEX 0, 0, 500, 200
+CAPTION "GpgChecker"
+STYLE DS_CENTER | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_SIZEBOX
+EXSTYLE WS_EX_ACCEPTFILES
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    DEFPUSHBUTTON "Exit", IDOK, 400, 150, 50, 14
+    PUSHBUTTON "Open Dev File", IDC_DEVFILE, 400, 28, 50, 14
+    PUSHBUTTON "About...", IDC_ABOUT, 400, 5, 50, 14
+    EDITTEXT IDC_FILENAME_DEV_PK, 11, 28, 365, 12, ES_READONLY //Developer public key
+    GROUPBOX "Developer Public key File", -1, 4, 13, 380, 32
+    PUSHBUTTON "Clean List", IDC_FLUSH, 400, 60, 50, 14
+    PUSHBUTTON "Select Files", IDC_ADDFILES, 400, 90, 50, 14
+    PUSHBUTTON "Export List", IDC_EXPORT, 400, 120, 50, 14
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+// ICON
+
+IDI_ICON1 ICON "res/Application.ico"
+
+//////////////////////////////////////////////////////////////////////////////
+
+// VERSION
+
+1 VERSIONINFO
+FILEVERSION     1, 0, 0
+PRODUCTVERSION  1, 0, 0
+FILEOS          0x0004
+FILETYPE        0x1
+FILESUBTYPE     0x0
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904b0"
+        {
+            VALUE "CompanyName", "GpgChecker\0"
+            VALUE "FileDescription", "Verify GPG signatures\0"
+            VALUE "FileVersion", "1.0.0\0"
+            VALUE "InternalName", "GpgChecker\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024\0"
+            VALUE "OriginalFilename", "GpgChecker.exe\0"
+            VALUE "ProductName", "GpgChecker\0"
+            VALUE "ProductVersion", "1.0.0\0"
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x0409, 0x04B0
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+// Manifest File
+
+// Application manifest.
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "res/GpgChecker.manifest"
