@@ -1,4 +1,7 @@
 Application Icon has been developed by The Oxygen Team.
+License: GNU LGPL 3
+https://github.com/KDE/oxygen-icons5/blob/master/64x64/actions/dialog-ok-apply.png
+https://www.gnu.org/licenses/lgpl-3.0.html
 
 Art Directors:
 Nuno F. Pinheiro <nuno@oxygen-icons.org>
