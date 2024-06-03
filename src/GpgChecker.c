@@ -411,8 +411,7 @@ char* VerifySignature(char* SigFile)
                     lvitem.pszText = gpgstat.sig_name;
                     ListView_SetItem(hListview, &lvitem);
 
-                    //UpdateWindow(hListview);
-                    RedrawWindow(hListview, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
+                    UpdateWindow(hListview);                    
                     }
             }
             break;
