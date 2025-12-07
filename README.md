@@ -8,10 +8,10 @@ Compile using GCC 8 and higher by running makefile
 
 Installation:
 
-Put the compiled file in the same directory as GnuPG (1.4 or 2.2 versions)
+Put the compiled file in the same directory as GnuPG (1.4.23 or 2.4.8 versions)
 
-Requirements You will need Binaries of GnuPG 1.4 or 2.2.
-
+Requirements You will need Binaries of GnuPG 1.4.23 or 2.4.8
+8
 Usage:
 
 1. Press open dev file and select the public key file of the developer's application.
