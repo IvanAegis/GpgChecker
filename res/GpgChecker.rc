@@ -38,8 +38,8 @@ IDI_ICON1 ICON "res/Application.ico"
 // VERSION
 
 1 VERSIONINFO
-FILEVERSION     1, 0, 0
-PRODUCTVERSION  1, 0, 0
+FILEVERSION     1, 0, 1
+PRODUCTVERSION  1, 0, 1
 FILEOS          0x0004
 FILETYPE        0x1
 FILESUBTYPE     0x0
@@ -50,12 +50,12 @@ FILESUBTYPE     0x0
         {
             VALUE "CompanyName", "GpgChecker\0"
             VALUE "FileDescription", "Verify GPG signatures\0"
-            VALUE "FileVersion", "1.0.0\0"
+            VALUE "FileVersion", "1.0.1\0"
             VALUE "InternalName", "GpgChecker\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025\0"
             VALUE "OriginalFilename", "GpgChecker.exe\0"
             VALUE "ProductName", "GpgChecker\0"
-            VALUE "ProductVersion", "1.0.0\0"
+            VALUE "ProductVersion", "1.0.1\0"
         }
     }
     BLOCK "VarFileInfo"
@@ -70,3 +70,4 @@ FILESUBTYPE     0x0
 
 // Application manifest.
 CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "res/GpgChecker.manifest"
+
