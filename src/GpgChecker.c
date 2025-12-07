@@ -422,7 +422,7 @@ char* VerifySignature(char* SigFile)
         case IDC_ABOUT: 
 
                 {
-                    MessageBox(hwndDlg, "GpgChecker 1.0.0\n(C)2024 IvanAegis", "About", MB_OK | MB_ICONINFORMATION);
+                    MessageBox(hwndDlg, "GpgChecker 1.0.1\n(C)2025 IvanAegis", "About", MB_OK | MB_ICONINFORMATION);
                 }
 
             break;
@@ -549,3 +549,4 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLineA,
 	InitCommonControls();
 	return DialogBox(hInstance,MAKEINTRESOURCE(IDD_MAIN),0,(DLGPROC)MainDialogFunc);
 };
+
