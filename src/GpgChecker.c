@@ -27,6 +27,7 @@
 #include "resource.h"
 #include <string.h>
 #include <stdlib.h>
+#include "sha256.h"
 
 HINSTANCE gInstance=0;
 
@@ -36,7 +37,7 @@ LRESULT CALLBACK MainDialogFunc(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lPar
     ListView_DeleteAllItems(hListview);
     }
 
-    void warnIfFileNotPresent(const char* filename) {
+void warnIfFileNotPresent(const char* filename) {
     // Get the full path of the executable
     char exePath[MAX_PATH];
     GetModuleFileName(NULL, exePath, MAX_PATH);
@@ -48,12 +49,70 @@ LRESULT CALLBACK MainDialogFunc(HWND hwndDlg,UINT uMsg,WPARAM wParam,LPARAM lPar
 
     // Append the file name you want to check
     char filePath[MAX_PATH];
-    snprintf(filePath,MAX_PATH, "%s\\%s", exePath, filename);
+    snprintf(filePath, MAX_PATH, "%s\\%s", exePath, filename);
 
     // Check if the gpg.exe file exists, close program if not found.
     if (GetFileAttributes(filePath) == INVALID_FILE_ATTRIBUTES) {
         MessageBox(NULL, "GnuPG executable not found\nClosing Program...", "Fatal Error", MB_OK | MB_ICONERROR);
         exit(1);//close the program
+    }
+
+    // SHA-256 integrity check for gpg.exe
+    if (strcmp(filename, "gpg.exe") == 0) {
+        FILE* file = fopen(filePath, "rb");
+        if (!file) {
+            MessageBox(NULL, "Failed to open gpg.exe for integrity check\nClosing Program...", "Fatal Error", MB_OK | MB_ICONERROR);
+            exit(1);
+        }
+
+        // Calculate SHA-256 hash of the file
+        SHA256_CTX ctx;
+        sha256_init(&ctx);
+
+        BYTE buffer[4096];
+        size_t bytesRead;
+        while ((bytesRead = fread(buffer, 1, sizeof(buffer), file)) > 0) {
+            sha256_update(&ctx, buffer, bytesRead);
+        }
+        fclose(file);
+
+        BYTE hash[SHA256_BLOCK_SIZE];
+        sha256_final(&ctx, hash);
+
+        // Convert hash to hexadecimal string
+        char calculated_hash[65] = {0}; // 64 hex chars + null terminator
+        for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+            sprintf(calculated_hash + (i * 2), "%02X", hash[i]);
+        }
+
+        // List of valid SHA-256 hashes for different GnuPG versions
+        const char* valid_hashes[] = {
+            "357176C2108488054E45E490DDA00633A69ECAAD6381D1591FE4753760FE9E97",  // GnuPG Legacy 1.4.23
+            "073810C724470D41458EED037EBC584F78A79C8CDDC7AA7F5FA02626A4B29BAC"  // GnuPG Stable 2.4.8 
+        };
+        const int num_valid_hashes = sizeof(valid_hashes) / sizeof(valid_hashes[0]);
+
+        // Check if calculated hash matches any of the valid hashes
+        int hash_valid = 0;
+        for (int i = 0; i < num_valid_hashes; i++) {
+            if (_stricmp(calculated_hash, valid_hashes[i]) == 0) {
+                hash_valid = 1;
+                break;
+            }
+        }
+
+        if (!hash_valid) {
+            char error_msg[1024];
+            snprintf(error_msg, sizeof(error_msg), 
+                     "gpg.exe integrity check failed!\n\n"
+                     "Calculated hash: %s\n\n"
+                     "This hash doesn't match any known GnuPG version.\n"
+                     "The file may have been tampered with or is an unsupported version.\n"
+                     "Closing Program...", 
+                     calculated_hash);
+            MessageBox(NULL, error_msg, "Security Warning", MB_OK | MB_ICONERROR);
+            exit(1);
+        }
     }
 }
     
