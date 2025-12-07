@@ -1,7 +1,7 @@
 # This Makefile will build the MinGW Win32 application.
 
-HEADERS = include/resource.h
-OBJS =	obj/resource.o obj/GpgChecker.o
+HEADERS = include/resource.h include/sha256.h
+OBJS =	obj/resource.o obj/GpgChecker.o obj/sha256.o
 INCLUDE_DIRS = -I.\include
 
 WARNS = -Wall -Werror -Wextra
