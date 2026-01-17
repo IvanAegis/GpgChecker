@@ -1,6 +1,6 @@
 /* GpgChecker.c - The GnuPG Signatures Verification Frontend
  *
- * Copyright (C) IvanAegis
+ * Copyright (C) IvanRolero
  *
  * This file is part of GpgChecker.
  *
@@ -549,4 +549,5 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLineA,
 	InitCommonControls();
 	return DialogBox(hInstance,MAKEINTRESOURCE(IDD_MAIN),0,(DLGPROC)MainDialogFunc);
 };
+
 
